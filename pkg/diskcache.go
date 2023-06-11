@@ -40,7 +40,7 @@ func (d *Diskcache) Get(key string) ([]byte, bool) {
 
 func (d *Diskcache) Set(key string, data []byte) error {
     path := d.BuildPath(key)
-    file, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE, 0644)
+    file, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
     defer file.Close()
     if err != nil { return err }
     if _, err = file.Write(data); err != nil { return err }
